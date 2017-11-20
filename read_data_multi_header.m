@@ -1,3 +1,4 @@
+%%% created by Chandler 20Sep2017
 clc;
 clear;
 tic;
@@ -8,11 +9,11 @@ tic;
 % % ====== count the number and coordinate
 % length=size(temp{1});
 % nodes=length(1,1);
-% 
+%
 % header_n=27;
 % freq_n=1102;
 % nodes=nodes/(freq_n*2+header_n); % header:27 freq:1102 data:1102
-% 
+%
 % freq=zeros(1,freq_n);
 % data=zeros(nodes,freq_n);
 % for ii=header_n+1:header_n+freq_n
@@ -25,7 +26,7 @@ tic;
 %         data(jj,ii-((jj-1)*(header_n+freq_n*2)+header_n+freq_n)) = str2double(temp{1}{ii});
 %     end
 % end
-% 
+%
 % fclose(fid);
 % clear temp;
 
@@ -53,7 +54,7 @@ for ii=1:nodes
     data(ii,:) = str2num(tline{ii*3});
 end
 
-%% calculate the acoustic power amplitude of a frequency range 
+%% calculate the acoustic power amplitude of a frequency range
 f1 = input('Please input the start freq you consider f1: ');
 f2 = input('Please input the end freq you consider f2: ');
 f1_L=find(freq==f1);
