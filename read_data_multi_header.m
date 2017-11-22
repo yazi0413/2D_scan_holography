@@ -79,7 +79,7 @@ set(gca,'FontSize',12);title(['2D Scan Frequency Range: ',num2str(f1),'Hz - ',nu
 xlabel('X scan range(mm)','FontSize',12);ylabel('Y scan range(mm)','FontSize',12);
 
 saveas(gcf,['2D holography scan_',num2str(f1),'-',num2str(f2),'Hz.jpg']);
-pause
+pause；
 
 %% contour the scan
 figure;
