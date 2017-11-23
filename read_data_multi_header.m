@@ -1,4 +1,5 @@
 %%% created by Chandler 20Sep2017
+
 clc;
 clear;
 tic;
@@ -9,11 +10,11 @@ tic;
 % % ====== count the number and coordinate
 % length=size(temp{1});
 % nodes=length(1,1);
-%
+% 
 % header_n=27;
 % freq_n=1102;
 % nodes=nodes/(freq_n*2+header_n); % header:27 freq:1102 data:1102
-%
+% 
 % freq=zeros(1,freq_n);
 % data=zeros(nodes,freq_n);
 % for ii=header_n+1:header_n+freq_n
@@ -26,12 +27,12 @@ tic;
 %         data(jj,ii-((jj-1)*(header_n+freq_n*2)+header_n+freq_n)) = str2double(temp{1}{ii});
 %     end
 % end
-%
+% 
 % fclose(fid);
 % clear temp;
 
 %% another faster method - read every line
-fid=fopen('data 2017-10-16.txt','r');
+fid=fopen('There is a sound source_2017-11-17.txt','r');
 i=1;
 while feof(fid)==0
     tline{i,1}=fgetl(fid);
@@ -54,7 +55,7 @@ for ii=1:nodes
     data(ii,:) = str2num(tline{ii*3});
 end
 
-%% calculate the acoustic power amplitude of a frequency range
+%% calculate the acoustic power amplitude of a frequency range 
 f1 = input('Please input the start freq you consider f1: ');
 f2 = input('Please input the end freq you consider f2: ');
 f1_L=find(freq==f1);
@@ -62,7 +63,7 @@ f2_L=find(freq==f2);
 
 pressure = zeros(nodes,1);
 power_data = data.^2;
-pressure = sqrt( sum(power_data,2)/(f2_L-f1_L) );
+pressure = sqrt( sum(power_data(:,f1_L:f2_L),2)/(f2_L-f1_L) );
 
 
 %% pcolor of the scan
@@ -79,7 +80,7 @@ set(gca,'FontSize',12);title(['2D Scan Frequency Range: ',num2str(f1),'Hz - ',nu
 xlabel('X scan range(mm)','FontSize',12);ylabel('Y scan range(mm)','FontSize',12);
 
 saveas(gcf,['2D holography scan_',num2str(f1),'-',num2str(f2),'Hz.jpg']);
-pause；
+pause
 
 %% contour the scan
 figure;
@@ -88,7 +89,7 @@ im_base=imread('berlin60.jpg');         % first, we need a base figure
 image(im_base);
 set(h1,'handlevisibility','off','visible','off'); %clear the axis of figure
 
-contourf(P);colorbar('position',[0.92 0.11 0.03 0.81])
+contour(P);colorbar('position',[0.92 0.11 0.03 0.81])
 set(gca,'color','none','FontSize',12);
 title(['2D Scan Frequency Range: ',num2str(f1),'Hz - ',num2str(f2),'Hz'],'FontSize',12);
 xlabel('X scan range(mm)','FontSize',12);ylabel('Y scan range(mm)','FontSize',12);
